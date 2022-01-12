@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  cassandra-1:
+    image: cassandra:4.0
+    ports:
+      - 9042:9042

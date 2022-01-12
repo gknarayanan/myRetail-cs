@@ -1,0 +1,2 @@
+spring:  data:    cassandra:      contact-points:      - 127.0.0.1
+      keyspace-name: myretail      port: 9042      local-datacenter: datacenter1      schema-action: create-if-not-exists
