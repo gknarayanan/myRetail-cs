@@ -13,7 +13,7 @@ import com.cs.myretail.myretailrest.dto.ProductDetailDTO;
 import com.cs.myretail.myretailrest.service.ProductDetailService;
 
 @RestController
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/products")
 public class ProductDetailController {
 
 	@Autowired

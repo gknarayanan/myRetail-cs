@@ -42,7 +42,7 @@ public class ProductDetailControllerTest {
 		Mockito.when(productDetailServiceMock.retrieveProductDetail(Mockito.anyLong()))
 				.thenReturn(new ProductDetailDTO(12345L, "Test", mockProductPriceDTO));
 
-		final String product_url = "/product/12345";
+		final String product_url = "/products/12345";
 		final RequestBuilder requestBuilder = MockMvcRequestBuilders.get(product_url)
 				.accept(MediaType.APPLICATION_JSON_VALUE);
 
@@ -60,7 +60,7 @@ public class ProductDetailControllerTest {
 		Mockito.when(productDetailServiceMock.retrieveProductDetail(Mockito.anyLong()))
 				.thenThrow(new ProductNotFoundException(MessageConstants.PRODUCT_PRICE_NOT_FOUND));
 
-		final String product_url = "/product/12345";
+		final String product_url = "/products/12345";
 		final RequestBuilder requestBuilder = MockMvcRequestBuilders.get(product_url)
 				.accept(MediaType.APPLICATION_JSON_VALUE);
 
