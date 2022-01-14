@@ -1,9 +1,13 @@
 package com.cs.myretail.myretailrest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ProductPriceDTO {
 
+	@JsonProperty("value")
 	private Float price;
 
+	@JsonProperty("currency_code")
 	private String currency;
 
 	public ProductPriceDTO() {

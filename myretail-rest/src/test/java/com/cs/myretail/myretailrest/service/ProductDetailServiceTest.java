@@ -15,16 +15,18 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cs.myretail.myretailrest.constant.MessageConstants;
 import com.cs.myretail.myretailrest.dto.ProductDetailDTO;
 import com.cs.myretail.myretailrest.exception.ProductNotFoundException;
 import com.cs.myretail.myretailrest.model.ProductPrice;
+import com.cs.myretail.myretailrest.service.impl.ProductDetailServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductDetailServiceTest {
 
 	@Autowired
 	@InjectMocks
-	ProductDetailService productDetailService;
+	ProductDetailServiceImpl productDetailService;
 
 	@Mock
 	private ProductPriceService productPriceServiceMock;
@@ -58,7 +60,7 @@ public class ProductDetailServiceTest {
 			productDetailService.retrieveProductDetail(12345L);
 		});
 
-		String expectedMessage = "Product price is not available.";
+		String expectedMessage = MessageConstants.PRODUCT_PRICE_NOT_FOUND;
 		String actualMessage = exception.getMessage();
 
 		assertTrue(actualMessage.equals(expectedMessage));
@@ -72,10 +74,9 @@ public class ProductDetailServiceTest {
 			productDetailService.retrieveProductDetail(null);
 		});
 
-		String expectedMessage = "Product price is not available.";
 		String actualMessage = exception.getMessage();
 
-		assertTrue(actualMessage.equals(expectedMessage));
+		assertTrue(actualMessage.equals(MessageConstants.PRODUCT_PRICE_NOT_FOUND));
 	}
 
 }

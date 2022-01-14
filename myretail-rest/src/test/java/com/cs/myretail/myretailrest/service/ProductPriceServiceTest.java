@@ -14,13 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cs.myretail.myretailrest.model.ProductPrice;
 import com.cs.myretail.myretailrest.repository.ProductPriceRepository;
+import com.cs.myretail.myretailrest.service.impl.ProductPriceServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductPriceServiceTest {
 
 	@InjectMocks
 	@Autowired
-	ProductPriceService productPriceService;
+	ProductPriceServiceImpl productPriceService;
 
 	@Mock
 	private ProductPriceRepository productPriceRepositoryMock;

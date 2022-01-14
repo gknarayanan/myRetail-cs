@@ -1,11 +1,14 @@
 package com.cs.myretail.myretailrest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ProductDetailDTO {
 
 	private Long id;
 
 	private String name;
 
+	@JsonProperty("current_price")
 	private ProductPriceDTO currentPrice;
 
 	public ProductDetailDTO() {
