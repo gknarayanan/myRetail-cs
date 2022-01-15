@@ -74,7 +74,27 @@ public class ProductDetailControllerTest {
 		assertNotNull(customResponse);
 		assertNotNull(customResponse.getTimestamp());
 		assertEquals(customResponse.getMessage(), MessageConstants.PRODUCT_PRICE_NOT_FOUND);
+	}
 
+	@Test
+	public void getProductDetailById_noProductInformationFound() throws Exception {
+		Mockito.when(productDetailServiceMock.retrieveProductDetail(111L))
+				.thenThrow(new ProductNotFoundException(MessageConstants.PRODUCT_INFORMATION_NOT_FOUND));
+
+		final String product_url = "/products/111";
+		final RequestBuilder requestBuilder = MockMvcRequestBuilders.get(product_url)
+				.accept(MediaType.APPLICATION_JSON_VALUE);
+
+		final MvcResult actual = mockMvc.perform(requestBuilder).andReturn();
+
+		MockHttpServletResponse response = actual.getResponse();
+		assertNotNull(response);
+
+		CustomExceptionResponse customResponse = new ObjectMapper().readValue(response.getContentAsString(),
+				CustomExceptionResponse.class);
+		assertNotNull(customResponse);
+		assertNotNull(customResponse.getTimestamp());
+		assertEquals(customResponse.getMessage(), MessageConstants.PRODUCT_INFORMATION_NOT_FOUND);
 	}
 
 }

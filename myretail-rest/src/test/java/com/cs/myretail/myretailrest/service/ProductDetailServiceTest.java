@@ -31,12 +31,17 @@ public class ProductDetailServiceTest {
 	@Mock
 	private ProductPriceService productPriceServiceMock;
 
+	@Mock
+	private ProductInformationService productInformationServiceMock;
+
 	@Test
 	public void retrieveProductDetail_success() {
 		ProductPrice mockProductPrice = new ProductPrice();
 		mockProductPrice.setId(12345L);
 		mockProductPrice.setPrice((float) 19.99);
 		mockProductPrice.setCurrency("USD");
+
+		Mockito.when(productInformationServiceMock.getProductNameById(Mockito.anyLong())).thenReturn("Product Name");
 
 		Mockito.when(productPriceServiceMock.getProductPriceById(Mockito.anyLong()))
 				.thenReturn(Optional.of(mockProductPrice));
@@ -45,7 +50,7 @@ public class ProductDetailServiceTest {
 
 		assertNotNull(product);
 		assertEquals(product.getId(), 12345L);
-		assertEquals(product.getName(), "Test");
+		assertEquals(product.getName(), "Product Name");
 		assertNotNull(product.getCurrentPrice());
 		assertEquals(product.getCurrentPrice().getPrice(), (float) 19.99);
 		assertEquals(product.getCurrentPrice().getCurrency(), "USD");
@@ -67,11 +72,12 @@ public class ProductDetailServiceTest {
 	}
 
 	@Test
-	public void retrieveProductDetail_noPriceFound_nullId() {
-		Mockito.when(productPriceServiceMock.getProductPriceById(null)).thenReturn(Optional.ofNullable(null));
+	public void retrieveProductDetail_noProductInformationFound() {
+		Mockito.when(productInformationServiceMock.getProductNameById(Mockito.anyLong()))
+				.thenThrow(new ProductNotFoundException(MessageConstants.PRODUCT_PRICE_NOT_FOUND));
 
 		Exception exception = assertThrows(ProductNotFoundException.class, () -> {
-			productDetailService.retrieveProductDetail(null);
+			productDetailService.retrieveProductDetail(111L);
 		});
 
 		String actualMessage = exception.getMessage();

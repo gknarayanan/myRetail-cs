@@ -11,6 +11,7 @@ import com.cs.myretail.myretailrest.dto.ProductPriceDTO;
 import com.cs.myretail.myretailrest.exception.ProductNotFoundException;
 import com.cs.myretail.myretailrest.model.ProductPrice;
 import com.cs.myretail.myretailrest.service.ProductDetailService;
+import com.cs.myretail.myretailrest.service.ProductInformationService;
 import com.cs.myretail.myretailrest.service.ProductPriceService;
 
 @Service
@@ -19,9 +20,12 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 	@Autowired
 	private ProductPriceService productPriceService;
 
+	@Autowired
+	private ProductInformationService productInformationService;
+
 	@Override
 	public ProductDetailDTO retrieveProductDetail(Long id) throws ProductNotFoundException {
-		String productName = "Test"; // TODO - Get name from API here
+		String productName = productInformationService.getProductNameById(id);
 
 		Optional<ProductPrice> productPrice = productPriceService.getProductPriceById(id);
 		if (productPrice.isEmpty()) {
@@ -46,6 +50,14 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 
 	public void setProductPriceService(ProductPriceService productPriceService) {
 		this.productPriceService = productPriceService;
+	}
+
+	public ProductInformationService getProductInformationService() {
+		return productInformationService;
+	}
+
+	public void setProductInformationService(ProductInformationService productInformationService) {
+		this.productInformationService = productInformationService;
 	}
 
 }
