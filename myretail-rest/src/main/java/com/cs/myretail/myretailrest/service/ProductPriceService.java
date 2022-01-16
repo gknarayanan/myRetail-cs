@@ -8,4 +8,6 @@ public interface ProductPriceService {
 
 	Optional<ProductPrice> getProductPriceById(Long productId);
 
+	ProductPrice updateProductPrice(ProductPrice newProductPrice);
+
 }

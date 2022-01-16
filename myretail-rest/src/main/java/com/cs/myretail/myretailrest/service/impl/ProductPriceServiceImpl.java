@@ -22,6 +22,11 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 		return productPrice;
 	}
 
+	@Override
+	public ProductPrice updateProductPrice(ProductPrice newProductPrice) {
+		return productPriceRepository.save(newProductPrice);
+	}
+
 	public ProductPriceRepository getProductPriceRepository() {
 		return productPriceRepository;
 	}

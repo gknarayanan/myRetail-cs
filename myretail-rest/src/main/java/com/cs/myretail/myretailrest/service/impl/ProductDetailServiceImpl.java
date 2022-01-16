@@ -37,6 +37,26 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 		return product;
 	}
 
+	@Override
+	public ProductDetailDTO updateProductPrice(Long id, ProductPriceDTO newPrice) throws ProductNotFoundException {
+		String productName = productInformationService.getProductNameById(id);
+		Optional<ProductPrice> productPrice = productPriceService.getProductPriceById(id);
+		ProductPrice currentPrice = null;
+
+		if (productPrice.isEmpty()) {
+			currentPrice = new ProductPrice();
+			currentPrice.setId(id);
+		} else {
+			currentPrice = productPrice.get();
+		}
+
+		currentPrice.setPrice(newPrice.getPrice());
+		currentPrice.setCurrency(newPrice.getCurrency());
+		currentPrice = productPriceService.updateProductPrice(currentPrice);
+		ProductDetailDTO product = constructProductDetailDTO(id, productName, currentPrice);
+		return product;
+	}
+
 	private ProductDetailDTO constructProductDetailDTO(Long id, String productName, ProductPrice productPrice) {
 		ProductPriceDTO price = new ProductPriceDTO(productPrice.getPrice(), productPrice.getCurrency());
 		ProductDetailDTO product = new ProductDetailDTO(id, productName, price);
