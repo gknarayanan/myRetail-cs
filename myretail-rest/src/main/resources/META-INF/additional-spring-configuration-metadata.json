@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "product-information.url.endpoint",
+    "type": "java.lang.String",
+    "description": "A description for 'product-information.url.endpoint'"
+  },
+  {
+    "name": "product-information.url.key",
+    "type": "java.lang.String",
+    "description": "A description for 'product-information.url.key'"
+  }
+]}

@@ -1,2 +1,2 @@
 spring:  data:    cassandra:      contact-points:      - 127.0.0.1
-      keyspace-name: myretail      port: 9042      local-datacenter: datacenter1      schema-action: create-if-not-exists
+      keyspace-name: myretail      port: 9042      local-datacenter: datacenter1      schema-action: none  application:    name: myRetail      product-information:  url:    endpoint: 'https://redsky-uat.perf.target.com/redsky_aggregations/v1/redsky/case_study_v1?key={key}&tcin={tcin}'    key: ''
