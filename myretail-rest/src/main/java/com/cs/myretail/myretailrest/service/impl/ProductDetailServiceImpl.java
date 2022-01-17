@@ -2,6 +2,8 @@ package com.cs.myretail.myretailrest.service.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import com.cs.myretail.myretailrest.service.ProductPriceService;
 @Service
 public class ProductDetailServiceImpl implements ProductDetailService {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private ProductPriceService productPriceService;
 
@@ -29,6 +33,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 
 		Optional<ProductPrice> productPrice = productPriceService.getProductPriceById(id);
 		if (productPrice.isEmpty()) {
+			logger.error(MessageConstants.PRODUCT_PRICE_NOT_FOUND + " Product ID : " + id);
 			throw new ProductNotFoundException(MessageConstants.PRODUCT_PRICE_NOT_FOUND);
 		}
 

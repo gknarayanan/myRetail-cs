@@ -3,9 +3,10 @@ package com.cs.myretail.myretailrest.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -18,6 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class ProductInformationServiceImpl implements ProductInformationService {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -34,6 +37,7 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 		String name = parseResponseForProductName(response.getBody());
 
 		if (name == null) {
+			logger.error(MessageConstants.PRODUCT_INFORMATION_NOT_FOUND + " Product ID : " + productId);
 			throw new ProductNotFoundException(MessageConstants.PRODUCT_INFORMATION_NOT_FOUND);
 		}
 
@@ -49,10 +53,13 @@ public class ProductInformationServiceImpl implements ProductInformationService 
 
 			response = restTemplate.getForEntity(productInformationBaseEndpoint, String.class, vars);
 		} catch (RestClientException e) {
+			logger.error("Error while retrieving product information for product with ID : " + productId, e);
 			throw new ProductNotFoundException(MessageConstants.PRODUCT_INFORMATION_NOT_FOUND);
 		}
 
-		if (!response.getStatusCode().equals(HttpStatus.OK)) {
+		if (response.getBody() == null) {
+			logger.error("Error while retrieving product information for product with ID : " + productId
+					+ ". Service response code : " + response.getStatusCode());
 			throw new ProductNotFoundException(MessageConstants.PRODUCT_INFORMATION_NOT_FOUND);
 		}
 
