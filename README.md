@@ -1,7 +1,7 @@
 # myRetail RESTful service
 This is a proof of concept RESTful API to provide product information and update product price.
 
-    1. GET operation at '/products/{id}' -  Retrive product name from an external API, retrieve product price from Cassandra database and returns a JSON response
+    1. GET operation at '/products/{id}' -  Retrieve product name from an external API, retrieve product price from Cassandra database and returns a JSON response
     2. PUT operation at '/products/{id}/price' - Updates the price of the product with the given id and returns the same response as the GET operation
 
 
