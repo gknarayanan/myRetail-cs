@@ -22,7 +22,8 @@ This is a proof of concept RESTful API to provide product information and update
 
 
 # Running the application
-    Pre-requisite : Download the project from the following git repository
+    Pre-requisite : Download the project from the following git repository:
+        https://github.com/gknarayanan/myRetail-cs
 
 ## 1. Cassandra setup (Pre-requisite : Docker)
     a. Using cmd/terminal, navigate to the folder with 'docker-compose.yaml'
