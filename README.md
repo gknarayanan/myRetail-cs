@@ -40,10 +40,12 @@ This is a proof of concept RESTful API to provide product information and update
 
 
 # Testing the API using Postman
-a. GET operation at '/products/{id}' -
+* GET operation at '/products/{id}' -
     * URI - http://localhost:8080/products/13264003
 
     * Response JSON - 
+
+    ```
         {
             "id": 13264003,
             "name": "Jif Natural Creamy Peanut Butter - 40oz",
@@ -52,18 +54,22 @@ a. GET operation at '/products/{id}' -
                 "currency_code": "CAD"
             }
         }
+    ```
 
 
-b. PUT operation at '/products/{id}/price' - 
+* PUT operation at '/products/{id}/price' - 
     * URI - http://localhost:8080/products/13264003/price
 
     * Request JSON Body - 
+    ```
         {
             "value": 79.99,
             "currency_code": "CAD"
         }
+    ```
 
     * Response JSON - 
+    ```
         {
             "id": 13264003,
             "name": "Jif Natural Creamy Peanut Butter - 40oz",
@@ -72,3 +78,5 @@ b. PUT operation at '/products/{id}/price' -
                 "currency_code": "CAD"
             }
         }
+    ```
+    
